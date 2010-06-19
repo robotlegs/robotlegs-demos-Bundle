@@ -2,10 +2,6 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
 		   backgroundColor="#000000"
 		   height="125"
-		   width="100%"
-		   paddingBottom="0"
-		   paddingLeft="0"
-		   paddingRight="0"
-		   paddingTop="0">
+		   width="100%">
 
 </mx:Canvas>

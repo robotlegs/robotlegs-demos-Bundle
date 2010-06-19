@@ -6,7 +6,6 @@ package org.robotlegs.demos.acmewidgetfactory.shell.controller
 	{
 		public static const REMOVE_ALL_WIDGETS:String = 'REMOVE_ALL_WIDGETS';
 		public static const CLEAR_LOGGER:String = 'CLEAR_LOGGER';
-		public static const ADD_GENERIC_MODULE:String = 'ADD_GENERIC_MODULE';
 		
 		public function ShellEvent(type:String)
 		{

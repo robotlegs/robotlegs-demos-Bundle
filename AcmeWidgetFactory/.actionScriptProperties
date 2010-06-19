@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="AcmeWidgetFactory.mxml" projectUUID="2a461a4a-1779-48f8-abc2-c97515cf9a99" version="6">
-  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<actionScriptProperties mainApplicationPath="AcmeWidgetFactory.mxml" projectUUID="dac41f24-4439-49c9-8df5-4cb4ede87482" version="6">
+  <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -9,13 +9,17 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="3" linkType="1" path="/robotlegs-framework/bin/robotlegs-framework.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="${DOCUMENTS}/robotlegs-framework/bin/robotlegs-framework-v1.1.1.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
+  <theme themeIsDefault="false" themeIsSDK="true" themeLocation="${SDK_THEMES_DIR}/frameworks/themes/Halo"/>
   <applications>
     <application path="AcmeWidgetFactory.mxml"/>
   </applications>
-  <modules/>
+  <modules>
+    <module application="src/AcmeWidgetFactory.mxml" destPath="org/robotlegs/demos/acmewidgetfactory/modules/widget/WidgetModule.swf" optimize="true" sourcePath="src/org/robotlegs/demos/acmewidgetfactory/modules/widget/WidgetModule.mxml"/>
+    <module application="src/AcmeWidgetFactory.mxml" destPath="org/robotlegs/demos/acmewidgetfactory/modules/logger/LoggerModule.swf" optimize="true" sourcePath="src/org/robotlegs/demos/acmewidgetfactory/modules/logger/LoggerModule.mxml"/>
+  </modules>
   <buildCSSFiles/>
 </actionScriptProperties>

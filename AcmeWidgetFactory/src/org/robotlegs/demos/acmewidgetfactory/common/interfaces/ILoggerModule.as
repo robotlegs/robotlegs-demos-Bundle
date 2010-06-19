@@ -1,6 +1,5 @@
 package org.robotlegs.demos.acmewidgetfactory.common.interfaces
 {
-	import org.robotlegs.core.IContextProvider;
 	
 	public interface ILoggerModule extends IContextProvider
 	{

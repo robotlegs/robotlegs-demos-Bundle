@@ -22,7 +22,6 @@ package org.robotlegs.demos.acmewidgetfactory.shell.view
 			eventMap.mapListener(view.destroyWidgetButton, MouseEvent.CLICK, onDestroyWidgetClick);
 			eventMap.mapListener(view.destroyAllWidgetsButton, MouseEvent.CLICK, onDestroyAllClick);
 			eventMap.mapListener(view.clearLoggerButton, MouseEvent.CLICK, onClearLoggerClick);
-			eventMap.mapListener(view.addGenericModuleButton, MouseEvent.CLICK, onAddGenericModuleClick);
 		}
 		
 		protected function onCreateWidgetClick(e:MouseEvent):void
@@ -48,11 +47,6 @@ package org.robotlegs.demos.acmewidgetfactory.shell.view
 		protected function onClearLoggerClick(e:MouseEvent):void
 		{
 			eventDispatcher.dispatchEvent(new ShellEvent(ShellEvent.CLEAR_LOGGER));
-		}
-	
-		protected function onAddGenericModuleClick(e:MouseEvent):void
-		{
-			eventDispatcher.dispatchEvent(new ShellEvent(ShellEvent.ADD_GENERIC_MODULE));
 		}
 	
 	}

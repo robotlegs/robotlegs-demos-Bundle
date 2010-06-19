@@ -39,9 +39,9 @@ package org.robotlegs.demos.acmewidgetfactory.shell
 	import org.robotlegs.demos.acmewidgetfactory.shell.view.WidgetHolderMediator;
 	import org.robotlegs.demos.acmewidgetfactory.shell.view.WidgetHolderView;
 	import org.robotlegs.demos.acmewidgetfactory.shell.view.WidgetModuleMediator;
-	import org.robotlegs.utilities.modular.mvcs.ModuleShellContext;
+	import org.robotlegs.mvcs.Context;
 	
-	public class AcmeWidgetFactoryContext extends ModuleShellContext
+	public class AcmeWidgetFactoryContext extends Context
 	{
 		
 		override public function startup():void

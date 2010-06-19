@@ -58,9 +58,6 @@
 			<mx:Button id="destroyAllWidgetsButton"
 					   label="Destroy All Widgets"
 					   width="100%"/>
-			<mx:Button id="addGenericModuleButton"
-					   label="Add Generic Module"
-					   width="100%"/>
 			<mx:Button id="clearLoggerButton"
 					   label="Clear Logger"
 					   width="100%"/>
