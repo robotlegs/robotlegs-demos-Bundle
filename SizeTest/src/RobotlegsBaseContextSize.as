@@ -24,13 +24,21 @@ package
 {
 	import flash.display.Sprite;
 	
+	import org.robotlegs.base.CommandMap;
 	import org.robotlegs.base.ContextBase;
+	import org.robotlegs.base.EventMap;
+	import org.robotlegs.base.MediatorMap;
+	import org.robotlegs.base.ViewMap;
 	
 	public class RobotlegsBaseContextSize extends Sprite
 	{
 		public function RobotlegsBaseContextSize()
 		{
 			new ContextBase();
+			new MediatorMap(this, null, null);
+			new ViewMap(this, null);
+			new CommandMap(this, null, null);
+			new EventMap(this);
 		}
 	}
 }
