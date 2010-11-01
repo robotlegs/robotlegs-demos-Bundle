@@ -26,8 +26,9 @@ public class Readout extends Sprite
     protected function init ():void
     {
         textField = new TextField();
-        
         addChild(textField);
+
+        this.mouseEnabled = this.mouseChildren = false;
     }
 
 }
