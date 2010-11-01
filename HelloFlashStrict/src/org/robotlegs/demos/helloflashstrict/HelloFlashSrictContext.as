@@ -22,7 +22,7 @@ import org.robotlegs.mvcs.Context;
 
 public class HelloFlashSrictContext extends Context
 {
-    
+
     public function HelloFlashSrictContext (contextView:DisplayObjectContainer)
     {
         super(contextView);
@@ -33,12 +33,12 @@ public class HelloFlashSrictContext extends Context
         commandMap.mapEvent(ContextEvent.STARTUP_COMPLETE, StartupCommand, ContextEvent);
         commandMap.mapEvent(HelloFlashEvent.BALL_CLICKED, CreateBallCommand, HelloFlashEvent);
         commandMap.mapEvent(HelloFlashEvent.BALL_CREATED, DisplayBallCommand, HelloFlashEvent);
-        
+
         injector.mapSingletonOf(IItemContainer, ItemContainer);
-        
+
         mediatorMap.mapView(Ball, BallMediator);
         mediatorMap.mapView(Readout, ReadoutMediator);
-        
+
         super.startup();
     }
 
