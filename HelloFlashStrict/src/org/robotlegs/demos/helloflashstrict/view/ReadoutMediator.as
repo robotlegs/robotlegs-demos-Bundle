@@ -19,7 +19,7 @@ public class ReadoutMediator extends Mediator
 
     override public function onRegister ():void
     {
-        eventMap.mapListener(eventDispatcher, HelloFlashEvent.BALL_CREATED, onBallCreated);
+        addContextListener(HelloFlashEvent.BALL_CREATED, onBallCreated);
     }
 
     protected function onBallCreated (event:HelloFlashEvent):void
