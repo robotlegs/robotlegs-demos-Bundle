@@ -12,8 +12,7 @@
 -->
 <s:ItemRenderer 
 	xmlns:fx="http://ns.adobe.com/mxml/2009" 
-	xmlns:s="library://ns.adobe.com/flex/spark" 
-	xmlns:mx="library://ns.adobe.com/flex/mx" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
 	width="85" 
 	height="85" 
 	selected="{this.image.selected}">
@@ -42,25 +41,22 @@
 		<s:BasicLayout/>
 	</s:layout>
 	<s:states>
-		<mx:State name="normal" />
-		<mx:State name="hovered" />
-		<mx:State name="selected"/>
+		<s:State name="normal" />
+		<s:State name="hovered" />
+		<s:State name="selected"/>
 	</s:states>
 	<s:Rect left="5" right="5" top="5" bottom="5" >
 		<s:stroke>
 			<s:SolidColorStroke color="#000000" color.selected="#FF0000" />
 		</s:stroke>
 		<s:fill>
-		
-			<mx:LinearGradient rotation="90">
-				<mx:entries>
-					<mx:GradientEntry color="#000000"/>
-					<mx:GradientEntry color="#000000"/>
-				</mx:entries>
-			</mx:LinearGradient>
+			<s:LinearGradient rotation="90">
+					<s:GradientEntry color="#000000"/>
+					<s:GradientEntry color="#000000"/>
+			</s:LinearGradient>
 		</s:fill>
 	</s:Rect>
-	<mx:Image 
+	<s:Image 
 		x="5" y="5" 
 		source="{image.thumbURL}" 
 		alpha.hovered="1" alpha.selected="1" alpha=".9" click="clickHandler(event)"/>
