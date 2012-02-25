@@ -2,7 +2,6 @@
 bin/
 bin-debug/
 html-template/
-libs/
 .DS_Store
 .settings
 bin-release
