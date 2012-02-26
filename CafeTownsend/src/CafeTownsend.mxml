@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--- @author Jonathan Toland -->
 <mx:Application
-		xmlns:mx="http://www.adobe.com/2006/mxml"
-		xmlns:cafetownsend="org.robotlegs.demos.cafetownsend.*"
-		xmlns:components="org.robotlegs.demos.cafetownsend.main.view.components.*"
-		backgroundColor="black"
-		layout="vertical"
-		viewSourceURL="srcview/index.html"
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:cafetownsend="org.robotlegs.demos.cafetownsend.*"
+	xmlns:components="org.robotlegs.demos.cafetownsend.main.view.components.*"
+	xmlns:rl2="robotlegs.bender.mxml.*"
+	xmlns:migration="robotlegs.bender.extensions.migration.*"
+	xmlns:classic="robotlegs.bender.bundles.classic.*"
+	backgroundColor="black"
+	layout="vertical"
+	viewSourceURL="srcview/index.html"
 	>
-	<mx:Style source="org/robotlegs/demos/cafetownsend/main/view/components/assets/application.css"/>
-	<cafetownsend:ApplicationContext contextView="{this}"/>
+	<fx:Style source="org/robotlegs/demos/cafetownsend/main/view/components/assets/application.css"/>
+	<fx:Declarations>
+		<rl2:ContextBuilderTag>
+			<classic:ClassicRobotlegsBundle/>
+			<migration:MigrationExtension/>
+			<cafetownsend:ApplicationConfig/>
+		</rl2:ContextBuilderTag>
+	</fx:Declarations>
 	<components:Main width="700"/>
 </mx:Application>
