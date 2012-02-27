@@ -1,12 +1,15 @@
 package org.robotlegs.demos.cafetownsend.detail.model
 {
-import org.robotlegs.demos.cafetownsend.detail.model.events.EmployeeDetailEvent;
-import org.robotlegs.demos.cafetownsend.detail.model.vo.Employee;
-import org.robotlegs.mvcs.Actor;
+	import flash.events.IEventDispatcher;
 
-/** @author Jonathan Toland */
-public class EmployeeDetailModel extends Actor
+	import org.robotlegs.demos.cafetownsend.detail.model.events.EmployeeDetailEvent;
+	import org.robotlegs.demos.cafetownsend.detail.model.vo.Employee;
+
+	/** @author Jonathan Toland */
+public class EmployeeDetailModel
 {
+	[Inject] public var eventDispatcher : IEventDispatcher;
+
 	private var _employee:Employee;
 	
 	public function get employee():Employee
@@ -17,7 +20,7 @@ public class EmployeeDetailModel extends Actor
 	public function set employee(value:Employee):void
 	{
 		_employee = value;
-		dispatch(new EmployeeDetailEvent(EmployeeDetailEvent.EDIT, value && value.clone()));
+		eventDispatcher.dispatchEvent(new EmployeeDetailEvent(EmployeeDetailEvent.EDIT, value && value.clone()));
 	}
 	
 }

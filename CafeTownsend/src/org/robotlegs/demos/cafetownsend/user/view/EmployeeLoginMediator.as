@@ -6,9 +6,10 @@ import org.robotlegs.demos.cafetownsend.user.model.EmployeeLoginModel;
 import org.robotlegs.demos.cafetownsend.user.model.events.EmployeeLoginEvent;
 import org.robotlegs.demos.cafetownsend.user.service.interfaces.IEmployeeLoginService;
 import org.robotlegs.demos.cafetownsend.user.view.components.interfaces.IEmployeeLogin;
-import org.robotlegs.mvcs.Mediator;
 
-/** @author Jonathan Toland */
+import robotlegs.bender.bundles.classic.impl.Mediator;
+
+	/** @author Jonathan Toland */
 public class EmployeeLoginMediator extends Mediator
 {
 	[Inject]
@@ -21,8 +22,9 @@ public class EmployeeLoginMediator extends Mediator
 	public var usernameValidator:Validator;
 	[Inject]
 	public var passwordValidator:Validator;
-	
-	override public function onRegister():void
+
+	[PostConstruct]
+	public function onRegister():void
 	{
 		eventMap.mapListener(employeeLogin, EmployeeLoginEvent.LOGIN, onLogin, EmployeeLoginEvent);
 		eventMap.mapListener(eventDispatcher, EmployeeLoginEvent.USER, whenUser, EmployeeLoginEvent);

@@ -13,9 +13,10 @@ import org.robotlegs.demos.cafetownsend.main.model.events.MainEvent;
 import org.robotlegs.demos.cafetownsend.main.model.events.SystemAlertEvent;
 import org.robotlegs.demos.cafetownsend.main.model.vo.SystemAlert;
 import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
-import org.robotlegs.mvcs.Mediator;
 
-/** @author Jonathan Toland */
+import robotlegs.bender.bundles.classic.impl.Mediator;
+
+	/** @author Jonathan Toland */
 public class EmployeeDetailMediator extends Mediator
 {
 	[Inject]
@@ -37,8 +38,9 @@ public class EmployeeDetailMediator extends Mediator
 	{
 		employeeDetail.employee = value || new Employee('', '', '', new Date());
 	}
-	
-	override public function onRegister():void
+
+	[PostConstruct]
+	public function onRegister():void
 	{
 		eventMap.mapListener(employeeDetail, EmployeeDetailEvent.ABORT, onAbort, EmployeeDetailEvent);
 		eventMap.mapListener(employeeDetail, EmployeeDetailEvent.COMMIT, onCommit, EmployeeDetailEvent);

@@ -1,18 +1,16 @@
 package org.robotlegs.demos.cafetownsend.main.service
 {
-import mx.resources.IResourceManager;
+	import flash.utils.getQualifiedClassName;
 
-import org.robotlegs.core.IReflector;
-import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
-import org.robotlegs.mvcs.Actor;
+	import mx.resources.IResourceManager;
 
-/** @author Jonathan Toland */
-public class ResourceManagerService extends Actor implements IResourceManagerService
+	import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
+
+	/** @author Jonathan Toland */
+public class ResourceManagerService implements IResourceManagerService
 {
 	private const parametersPattern:RegExp = /\{(\w+)\}/g;
 	
-	[Inject]
-	public var reflector:IReflector;
 	[Inject]
 	public var resourceManager:IResourceManager;
 	
@@ -39,7 +37,7 @@ public class ResourceManagerService extends Actor implements IResourceManagerSer
 	
 	private function getUnqualifiedClassName(value:*):String
 	{
-		return reflector.getFQCN(value).split('::').pop();
+		return getQualifiedClassName(value).split('::').pop();
 	}
 	
 }

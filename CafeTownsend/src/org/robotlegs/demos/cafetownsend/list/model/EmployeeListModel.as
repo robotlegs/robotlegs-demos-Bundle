@@ -1,14 +1,16 @@
 package org.robotlegs.demos.cafetownsend.list.model
 {
-import flash.utils.Dictionary;
+	import flash.events.IEventDispatcher;
+	import flash.utils.Dictionary;
 
-import org.robotlegs.demos.cafetownsend.detail.model.vo.Employee;
-import org.robotlegs.demos.cafetownsend.list.model.events.EmployeeListEvent;
-import org.robotlegs.mvcs.Actor;
+	import org.robotlegs.demos.cafetownsend.detail.model.vo.Employee;
+	import org.robotlegs.demos.cafetownsend.list.model.events.EmployeeListEvent;
 
-/** @author Jonathan Toland */
-public class EmployeeListModel extends Actor
+	/** @author Jonathan Toland */
+public class EmployeeListModel
 {
+	[Inject] public var eventDispatcher : IEventDispatcher;
+
 	private const employeeMap:Dictionary = new Dictionary(false);
 	
 	private var _autoIncrementEmployeeID:uint = 0x400;
@@ -30,7 +32,7 @@ public class EmployeeListModel extends Actor
 	public function unmapEmployee(employee:Employee):void
 	{
 		delete employeeMap[employee.id];
-		dispatch(new EmployeeListEvent(EmployeeListEvent.REMOVE, employee.clone()));
+		eventDispatcher.dispatchEvent(new EmployeeListEvent(EmployeeListEvent.REMOVE, employee.clone()));
 	}
 	
 	public function mapEmployee(employee:Employee):void
@@ -41,7 +43,7 @@ public class EmployeeListModel extends Actor
 			employee = employee.clone(autoIncrementEmployeeID);
 		}
 		employeeMap[employee.id] = employee;
-		dispatch(new EmployeeListEvent(eventType, employee.clone()));
+		eventDispatcher.dispatchEvent(new EmployeeListEvent(eventType, employee.clone()));
 	}
 	
 }

@@ -11,9 +11,10 @@ import org.robotlegs.demos.cafetownsend.main.model.events.MainEvent;
 import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
 import org.robotlegs.demos.cafetownsend.user.model.events.EmployeeLoginEvent;
 import org.robotlegs.demos.cafetownsend.user.service.interfaces.IEmployeeLoginService;
-import org.robotlegs.mvcs.Mediator;
 
-[ResourceBundle("EmployeeList")]
+import robotlegs.bender.bundles.classic.impl.Mediator;
+
+	[ResourceBundle("EmployeeList")]
 /** @author Jonathan Toland */
 public class EmployeeListMediator extends Mediator
 {
@@ -29,8 +30,9 @@ public class EmployeeListMediator extends Mediator
 	public var resourceManagerService:IResourceManagerService;
 	
 	private var itemLabelFormat:String;
-	
-	override public function onRegister():void
+
+	[PostConstruct]
+	public function onRegister():void
 	{
 		eventMap.mapListener(employeeList, EmployeeLoginEvent.LOGOUT, onLogout, EmployeeLoginEvent);
 		eventMap.mapListener(employeeList, EmployeeDetailEvent.EDIT, onEdit, EmployeeDetailEvent);

@@ -9,6 +9,7 @@ package org.robotlegs.demos.cafetownsend
 {
 	import flash.display.DisplayObjectContainer;
 
+	import mx.core.Application;
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
 	import mx.rpc.http.HTTPService;
@@ -17,19 +18,13 @@ package org.robotlegs.demos.cafetownsend
 	import mx.validators.Validator;
 
 	import org.hamcrest.object.instanceOf;
-
-	import org.robotlegs.core.ICommandMap;
-	import org.robotlegs.core.IInjector;
-	import org.robotlegs.core.IMediatorMap;
 	import org.robotlegs.demos.cafetownsend.detail.model.EmployeeDetailModel;
 	import org.robotlegs.demos.cafetownsend.detail.view.EmployeeDetailMediator;
-	import org.robotlegs.demos.cafetownsend.detail.view.components.EmployeeDetail;
 	import org.robotlegs.demos.cafetownsend.detail.view.components.interfaces.IEmployeeDetail;
 	import org.robotlegs.demos.cafetownsend.list.model.EmployeeListModel;
 	import org.robotlegs.demos.cafetownsend.list.service.EmployeeListService;
 	import org.robotlegs.demos.cafetownsend.list.service.interfaces.IEmployeeListService;
 	import org.robotlegs.demos.cafetownsend.list.view.EmployeeListMediator;
-	import org.robotlegs.demos.cafetownsend.list.view.components.EmployeeList;
 	import org.robotlegs.demos.cafetownsend.list.view.components.interfaces.IEmployeeList;
 	import org.robotlegs.demos.cafetownsend.main.service.ResourceManagerService;
 	import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
@@ -42,17 +37,19 @@ package org.robotlegs.demos.cafetownsend
 	import org.robotlegs.demos.cafetownsend.user.service.MockEmployeeLoginService;
 	import org.robotlegs.demos.cafetownsend.user.service.interfaces.IEmployeeLoginService;
 	import org.robotlegs.demos.cafetownsend.user.view.EmployeeLoginMediator;
-	import org.robotlegs.demos.cafetownsend.user.view.components.EmployeeLogin;
 	import org.robotlegs.demos.cafetownsend.user.view.components.interfaces.IEmployeeLogin;
+	import org.swiftsuspenders.Injector;
 
+	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
+	import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
 	import robotlegs.bender.framework.context.api.IContext;
 	import robotlegs.bender.framework.context.api.IContextConfig;
 
 	public class ApplicationConfig implements IContextConfig
 	{
-		private var injector : IInjector;
+		private var injector : Injector;
 		private var mediatorMap:IMediatorMap;
-		private var commandMap:ICommandMap;
+		private var commandMap:IEventCommandMap;
 
 		private var _context:IContext;
 
@@ -64,49 +61,54 @@ package org.robotlegs.demos.cafetownsend
 
 		private function handleContextView(contextView:DisplayObjectContainer):void
 		{
-			injector = _context.injector.getInstance(IInjector);
+			injector = _context.injector;
 			mediatorMap = injector.getInstance(IMediatorMap);
-			commandMap = injector.getInstance(ICommandMap);
+			commandMap = injector.getInstance(IEventCommandMap);
 			mapMembership();
 			mapModel();
 			mapService();
 			mapView();
 			mapController();
+
+			//cheat, because I don't know the first thing about Flex:
+			const main:Main = new Main();
+			main.width = 700;
+			Application(contextView).addElement(main);
 		}
 
 		private function mapMembership():void
 		{
-			injector.mapValue(IResourceManager, ResourceManager.getInstance());
-			injector.mapClass(HTTPService, HTTPService);
-			injector.mapClass(Validator, StringValidator);
-			injector.mapClass(Validator, EmailValidator, 'Email');
+			injector.map(IResourceManager).toValue(ResourceManager.getInstance());
+			injector.map(HTTPService).toType(HTTPService);
+			injector.map(Validator).toType(StringValidator);
+			injector.map(Validator, 'Email').toType(EmailValidator);
 		}
 
 		private function mapModel():void
 		{
-			injector.mapSingleton(EmployeeLoginModel);
-			injector.mapSingleton(EmployeeListModel);
-			injector.mapSingleton(EmployeeDetailModel);
+			injector.map(EmployeeLoginModel).asSingleton();
+			injector.map(EmployeeListModel).asSingleton();
+			injector.map(EmployeeDetailModel).asSingleton();
 		}
 
 		private function mapService():void
 		{
-			injector.mapSingletonOf(IResourceManagerService, ResourceManagerService);
-			injector.mapSingletonOf(IEmployeeLoginService, MockEmployeeLoginService);
-			injector.mapSingletonOf(IEmployeeListService, EmployeeListService);
+			injector.map(IResourceManagerService).toSingleton(ResourceManagerService);
+			injector.map(IEmployeeLoginService).toSingleton(MockEmployeeLoginService);
+			injector.map(IEmployeeListService).toSingleton(EmployeeListService);
 		}
 
 		private function mapView():void
 		{
-			mediatorMap.mapView(Main, MainMediator, IMain);
-			mediatorMap.mapView(EmployeeLogin, EmployeeLoginMediator, IEmployeeLogin);
-			mediatorMap.mapView(EmployeeList, EmployeeListMediator, IEmployeeList);
-			mediatorMap.mapView(EmployeeDetail, EmployeeDetailMediator, IEmployeeDetail);
+			mediatorMap.mapView(IMain).toMediator(MainMediator);
+			mediatorMap.mapView(IEmployeeLogin).toMediator(EmployeeLoginMediator);
+			mediatorMap.mapView(IEmployeeList).toMediator(EmployeeListMediator);
+			mediatorMap.mapView(IEmployeeDetail).toMediator(EmployeeDetailMediator);
 		}
 
 		private function mapController():void
 		{
-			commandMap.mapEvent(EmployeeLoginEvent.USER, UserCommand, EmployeeLoginEvent);
+			commandMap.map(EmployeeLoginEvent.USER, EmployeeLoginEvent).toCommand(UserCommand);
 		}
 	}
 }

@@ -1,17 +1,20 @@
 package org.robotlegs.demos.cafetownsend.user.service
 {
-import org.robotlegs.demos.cafetownsend.main.model.events.SystemAlertEvent;
-import org.robotlegs.demos.cafetownsend.main.model.vo.SystemAlert;
-import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
-import org.robotlegs.demos.cafetownsend.user.model.EmployeeLoginModel;
-import org.robotlegs.demos.cafetownsend.user.model.vo.User;
-import org.robotlegs.demos.cafetownsend.user.service.interfaces.IEmployeeLoginService;
-import org.robotlegs.mvcs.Actor;
+	import flash.events.IEventDispatcher;
 
-[ResourceBundle("MockEmployeeLoginService")]
+	import org.robotlegs.demos.cafetownsend.main.model.events.SystemAlertEvent;
+	import org.robotlegs.demos.cafetownsend.main.model.vo.SystemAlert;
+	import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
+	import org.robotlegs.demos.cafetownsend.user.model.EmployeeLoginModel;
+	import org.robotlegs.demos.cafetownsend.user.model.vo.User;
+	import org.robotlegs.demos.cafetownsend.user.service.interfaces.IEmployeeLoginService;
+
+	[ResourceBundle("MockEmployeeLoginService")]
 /** @author Jonathan Toland */
-public class MockEmployeeLoginService extends Actor implements IEmployeeLoginService
+public class MockEmployeeLoginService implements IEmployeeLoginService
 {
+	[Inject] public var eventDispatcher : IEventDispatcher;
+
 	[Inject]
 	public var employeeLoginModel:EmployeeLoginModel;
 	[Inject]
@@ -32,7 +35,7 @@ public class MockEmployeeLoginService extends Actor implements IEmployeeLoginSer
 		}
 		else
 		{
-			dispatch(new SystemAlertEvent(SystemAlertEvent.ALERT,
+			eventDispatcher.dispatchEvent(new SystemAlertEvent(SystemAlertEvent.ALERT,
 				new SystemAlert(getString('userFailureText'), getString('userFailureTitle'))));
 		}
 	}

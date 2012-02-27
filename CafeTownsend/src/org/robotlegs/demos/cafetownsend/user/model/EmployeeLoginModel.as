@@ -1,12 +1,15 @@
 package org.robotlegs.demos.cafetownsend.user.model
 {
-import org.robotlegs.demos.cafetownsend.user.model.events.EmployeeLoginEvent;
-import org.robotlegs.demos.cafetownsend.user.model.vo.User;
-import org.robotlegs.mvcs.Actor;
+	import flash.events.IEventDispatcher;
 
-/** @author Jonathan Toland */
-public class EmployeeLoginModel extends Actor
+	import org.robotlegs.demos.cafetownsend.user.model.events.EmployeeLoginEvent;
+	import org.robotlegs.demos.cafetownsend.user.model.vo.User;
+
+	/** @author Jonathan Toland */
+public class EmployeeLoginModel
 {
+	[Inject] public var eventDispatcher : IEventDispatcher;
+
 	private var _user:User;
 	
 	public function get user():User
@@ -17,7 +20,7 @@ public class EmployeeLoginModel extends Actor
 	public function set user(value:User):void
 	{
 		_user = value;
-		dispatch(new EmployeeLoginEvent(EmployeeLoginEvent.USER, value && value.clone()));
+		eventDispatcher.dispatchEvent(new EmployeeLoginEvent(EmployeeLoginEvent.USER, value && value.clone()));
 	}
 	
 	private var _hint:String;
@@ -30,7 +33,7 @@ public class EmployeeLoginModel extends Actor
 	public function set hint(value:String):void
 	{
 		_hint = value;
-		dispatch(new EmployeeLoginEvent(EmployeeLoginEvent.HINT, null));
+		eventDispatcher.dispatchEvent(new EmployeeLoginEvent(EmployeeLoginEvent.HINT, null));
 	}
 	
 }

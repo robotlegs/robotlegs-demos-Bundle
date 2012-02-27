@@ -1,24 +1,26 @@
 package org.robotlegs.demos.cafetownsend.list.service
 {
-import flash.xml.XMLNode;
+	import flash.events.IEventDispatcher;
+	import flash.xml.XMLNode;
 
-import mx.rpc.IResponder;
-import mx.rpc.events.FaultEvent;
-import mx.rpc.events.ResultEvent;
-import mx.rpc.http.HTTPService;
+	import mx.rpc.IResponder;
+	import mx.rpc.events.FaultEvent;
+	import mx.rpc.events.ResultEvent;
+	import mx.rpc.http.HTTPService;
 
-import org.robotlegs.demos.cafetownsend.detail.model.vo.Employee;
-import org.robotlegs.demos.cafetownsend.list.model.EmployeeListModel;
-import org.robotlegs.demos.cafetownsend.list.service.interfaces.IEmployeeListService;
-import org.robotlegs.demos.cafetownsend.main.model.events.SystemAlertEvent;
-import org.robotlegs.demos.cafetownsend.main.model.vo.SystemAlert;
-import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
-import org.robotlegs.mvcs.Actor;
+	import org.robotlegs.demos.cafetownsend.detail.model.vo.Employee;
+	import org.robotlegs.demos.cafetownsend.list.model.EmployeeListModel;
+	import org.robotlegs.demos.cafetownsend.list.service.interfaces.IEmployeeListService;
+	import org.robotlegs.demos.cafetownsend.main.model.events.SystemAlertEvent;
+	import org.robotlegs.demos.cafetownsend.main.model.vo.SystemAlert;
+	import org.robotlegs.demos.cafetownsend.main.service.interfaces.IResourceManagerService;
 
-[ResourceBundle("EmployeeListService")]
+	[ResourceBundle("EmployeeListService")]
 /** @author Jonathan Toland */
-public class EmployeeListService extends Actor implements IEmployeeListService, IResponder
+public class EmployeeListService implements IEmployeeListService, IResponder
 {
+	[Inject] public var eventDispatcher : IEventDispatcher;
+
 	[Inject]
 	public var employeeListModel:EmployeeListModel;
 	[Inject]
@@ -41,7 +43,7 @@ public class EmployeeListService extends Actor implements IEmployeeListService, 
 	
 	public function fault(info:Object):void
 	{
-		dispatch(new SystemAlertEvent(SystemAlertEvent.ALERT,
+		eventDispatcher.dispatchEvent(new SystemAlertEvent(SystemAlertEvent.ALERT,
 			new SystemAlert(FaultEvent(info).fault.faultString, resourceManagerService.getString(this, 'loadFailureTitle'))));
 	}
 	
