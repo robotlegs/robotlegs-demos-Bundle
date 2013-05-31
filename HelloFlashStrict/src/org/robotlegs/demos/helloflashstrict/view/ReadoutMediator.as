@@ -13,19 +13,19 @@ public class ReadoutMediator extends Mediator
 {
     [Inject]
     public var view:Readout;
-    
+
     [Inject]
     public var container:IItemContainer;
-    
+
     override public function onRegister ():void
     {
-        eventMap.mapListener(eventDispatcher, HelloFlashEvent.BALL_CREATED, onBallCreated);
+        addContextListener(HelloFlashEvent.BALL_CREATED, onBallCreated);
     }
-    
+
     protected function onBallCreated (event:HelloFlashEvent):void
     {
         view.setText("Click count: " + container.length);
     }
-    
+
 }
 }
