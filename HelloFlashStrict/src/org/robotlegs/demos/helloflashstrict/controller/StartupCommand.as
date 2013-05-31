@@ -14,7 +14,7 @@ public class StartupCommand extends Command
     override public function execute ():void
     {
         contextView.addChild(new Readout());
-        
+
         dispatch(new HelloFlashEvent(HelloFlashEvent.BALL_CLICKED));
     }
 

@@ -16,7 +16,7 @@ public class ItemVO
     }
 
     private var _displayer:DisplayObject;
-    
+
     public function get displayer ():DisplayObject
     {
         return _displayer;
