@@ -7,9 +7,9 @@ package org.robotlegs.demos.imagegallery.remote.services
 	import org.robotlegs.demos.imagegallery.events.GalleryEvent;
 	import org.robotlegs.demos.imagegallery.models.vo.Gallery;
 	import org.robotlegs.demos.imagegallery.models.vo.GalleryImage;
-	import org.robotlegs.mvcs.Service;
+	import org.robotlegs.mvcs.Actor
 
-	public class XMLImageService extends Service implements IGalleryImageService
+	public class XMLImageService extends Actor implements IGalleryImageService
 	{
 		protected static const BASE_URL:String = "assets/gallery/";
 		
@@ -51,7 +51,7 @@ package org.robotlegs.demos.imagegallery.remote.services
 				gallery.photos.addItem( photo );
 			}
 			
-			dispatchEvent(new GalleryEvent(GalleryEvent.GALLERY_LOADED, gallery));
+			dispatch(new GalleryEvent(GalleryEvent.GALLERY_LOADED, gallery));
 		}
 		
 		protected function handleServiceFault(event:Object):void
